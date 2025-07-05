@@ -1,0 +1,35 @@
+# docker-compose.yml
+version: '3.8'
+
+services:
+  # The Express.js Application Service
+  app:
+    build: . # Build the image from the Dockerfile in the current directory
+    ports:
+      - "5000:5000" # Map host port 5000 to container port 5000
+    env_file:
+      - ./.env # Load environment variables from the .env file
+    depends_on:
+      - mongo # This service depends on the 'mongo' service to be running
+    networks:
+      - app-network
+
+  # The MongoDB Database Service
+  mongo:
+    image: mongo:latest # Use the official MongoDB image
+    ports:
+      - "27017:27017" # Map host port 27017 to container port 27017
+    volumes:
+      - mongo-data:/data/db # Persist database data using a named volume
+    networks:
+      - app-network
+
+# Define the network for services to communicate
+networks:
+  app-network:
+    driver: bridge
+
+# Define the named volume for data persistence
+volumes:
+  mongo-data:
+    driver: local
