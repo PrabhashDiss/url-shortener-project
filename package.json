@@ -16,5 +16,12 @@
   "bugs": {
     "url": "https://github.com/PrabhashDiss/url-shortener-project/issues"
   },
-  "homepage": "https://github.com/PrabhashDiss/url-shortener-project#readme"
+  "homepage": "https://github.com/PrabhashDiss/url-shortener-project#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.0.1",
+    "express": "^5.1.0",
+    "mongoose": "^8.16.1",
+    "shortid": "^2.2.17"
+  }
 }
