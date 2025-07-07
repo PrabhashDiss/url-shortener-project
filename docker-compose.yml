@@ -7,6 +7,7 @@ services:
     build: . # Build the image from the Dockerfile in the current directory
     ports:
       - "5000:5000" # Map host port 5000 to container port 5000
+    container_name: app
     env_file:
       - ./.env # Load environment variables from the .env file
     depends_on:
@@ -19,6 +20,7 @@ services:
     image: mongo:latest # Use the official MongoDB image
     ports:
       - "27017:27017" # Map host port 27017 to container port 27017
+    container_name: mongo
     volumes:
       - mongo-data:/data/db # Persist database data using a named volume
     networks:
@@ -28,8 +30,10 @@ services:
 networks:
   app-network:
     driver: bridge
+    name: app-network
 
 # Define the named volume for data persistence
 volumes:
   mongo-data:
     driver: local
+    name: mongo-data
